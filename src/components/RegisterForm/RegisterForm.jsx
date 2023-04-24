@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoginUser } from 'api/serviseApi';
-// import { useDispatch } from 'react-redux';
-import { Form, Input, Button, Title } from './LoginForm.styled';
+import { RegisterUser, LoginUser } from 'api/serviseApi';
+import {
+  Form,
+  Input,
+  Button,
+  Title,
+} from '../LoginForm/LoginForm.styled';
 
-export const LoginForm = () => {
+export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const data = JSON.parse(localStorage.getItem('user'));
-  if (data) {
-    setName(data.name);
-    setPassword(data.password);
-  } 
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -26,7 +25,6 @@ export const LoginForm = () => {
       default:
         break;
     }
-    // localStorage.setItem('user', [setName, setPassword]);
   };
 
   const handleSubmit = async e => {
@@ -35,6 +33,7 @@ export const LoginForm = () => {
       name,
       password,
     };
+    await RegisterUser(user);
 
     const data = await LoginUser(user);
     localStorage.setItem('token', data.token);
@@ -61,9 +60,9 @@ export const LoginForm = () => {
           name="password"
           required
         />
-        <Button type="submit">Login</Button>
+        <Button type="submit">Create account</Button>
       </Form>
-      <Title to="/register">Registration</Title>
+      <Title to="/">Login</Title>
     </>
   );
 };

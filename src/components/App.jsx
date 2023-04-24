@@ -1,10 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 // import { lazy } from 'react';
-// import { PublicRoute } from './PublicRoute/PublicRoute';
-// import PrivateRoute from './PrivatRoute';
+import PublicRoute from './PublicRoute';
+import PrivateRoute from './PrivateRoute';
 
 import { Layout } from 'components/Layout/Layout';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
+import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
+import { ListPage } from '../pages/ListPage/ListPage';
+// const ListPage = lazy(() => import('../pages/ListPage/ListPage'));
 
 export const App = () => {
   return (
@@ -14,23 +17,23 @@ export const App = () => {
           <Route
             path="/"
             element={
-              <LoginPage />
-              // <PublicRoute component={<LoginPage />} redirectTo="/list" />
+              <PublicRoute component={<LoginPage />} redirectTo="/list" />
             }
           />
-          {/* <Route
-          path="/register"
-          element={
-            <PublicRoute component={<RegisterPage />} redirectTo="/list" />
-          }
-        />
-        <Route
-          path="/signin"
-          element={
-            <PublicRoute component={<SignInPage />} redirectTo="/main" />
-          }
-        />
-        <Route path="verification/:id" element={<Verification />} />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute component={<RegisterPage />} redirectTo="/list" />
+            }
+          />
+          <Route
+            path="/list"
+            element={
+              // <ListPage />
+              <PrivateRoute component={<ListPage />} />
+            }
+          />
+          {/* <Route path="verification/:id" element={<Verification />} />
 
         <Route path="/" element={<SharedLayout />}>
           <Route
