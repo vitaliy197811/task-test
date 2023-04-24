@@ -7,7 +7,7 @@ import { Search, Task } from './List.styled';
 export const List = () => {
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState([]);
-  const [search, setSearch] = useState('');
+  const [, setSearch] = useState('');
   const location = useLocation();
 
   const handleChange = e => {
