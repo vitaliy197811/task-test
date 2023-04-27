@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { RegisterUser, LoginUser } from 'api/serviseApi';
+import { registerUser, loginUser } from 'api/serviseApi';
 import {
   Form,
   Input,
@@ -33,9 +33,9 @@ export const RegisterForm = () => {
       name,
       password,
     };
-    await RegisterUser(user);
+    await registerUser(user);
 
-    const data = await LoginUser(user);
+    const data = await loginUser(user);
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(user));
     navigate('/list');

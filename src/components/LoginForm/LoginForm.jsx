@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoginUser } from 'api/serviseApi';
+import { loginUser } from 'api/serviseApi';
 // import { useDispatch } from 'react-redux';
 import { Form, Input, Button, Title } from './LoginForm.styled';
 
@@ -36,7 +36,7 @@ export const LoginForm = () => {
       password,
     };
 
-    const data = await LoginUser(user);
+    const data = await loginUser(user);
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(user));
     navigate('/list');

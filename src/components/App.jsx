@@ -7,6 +7,8 @@ import { Layout } from 'components/Layout/Layout';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
 import { ListPage } from '../pages/ListPage/ListPage';
+import { CreatePage } from '../pages/CreatePage/CreatePage';
+import { EditPage } from '../pages/EditPage/EditPage';
 // const ListPage = lazy(() => import('../pages/ListPage/ListPage'));
 
 export const App = () => {
@@ -28,58 +30,16 @@ export const App = () => {
           />
           <Route
             path="/list"
-            element={
-              // <ListPage />
-              <PrivateRoute component={<ListPage />} />
-            }
-          />
-          {/* <Route path="verification/:id" element={<Verification />} />
-
-        <Route path="/" element={<SharedLayout />}>
-          <Route
-            path="main"
-            index
-            element={<PrivateRoute component={<MainPage />} />}
+            element={<PrivateRoute component={<ListPage />} />}
           />
           <Route
-            path="categories"
-            element={<PrivateRoute component={<CategoriesPage />} />}
+            path="/add"
+            element={<PrivateRoute component={<CreatePage />} />}
           />
           <Route
-            path="categories/:categoryName"
-            element={<PrivateRoute component={<CategoriesPage />} />}
+            path="/list/:id"
+            element={<PrivateRoute component={<EditPage />} />}
           />
-          <Route
-            path="search"
-            element={<PrivateRoute component={<SearchPage />} />}
-          />
-          <Route
-            path="add"
-            element={
-              <PrivateRoute component={<AddRecipe />} redirectTo="/my" />
-            }
-          />
-          <Route
-            path="my"
-            element={<PrivateRoute component={<MyRecipes />} />}
-          />
-          <Route
-            path="favorite"
-            element={<PrivateRoute component={<Favorite />} />}
-          />
-          <Route
-            path="shopping-list"
-            element={<PrivateRoute component={<ShoppingList />} />}
-          />
-          <Route
-            path="recipe/:recipeId"
-            element={<PrivateRoute component={<RecipePage />} />}
-          />
-          <Route
-            path="*"
-            element={<PrivateRoute component={<NotFound />} />}
-          />
-        </Route> */}
         </Route>
       </Routes>
     </>

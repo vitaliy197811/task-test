@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Сontainer = styled.section`
   width: 100%;
+  /* height: 100%; */
   padding: 100px 8px 20px 8px;
   margin: 0 auto;
   @media (min-width: 375px) {
