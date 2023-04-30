@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getTask, edit } from 'api/serviseApi';
+import { getTask, editTask, delTask } from 'api/serviseApi';
 import {
   Form,
   Input,
@@ -10,7 +10,10 @@ import {
   Check,
   Svg,
   Text,
+  Common,
+  DelSvg,
 } from '../AddTask/AddTask.styled';
+import { Modal} from '../Modal/Modal';
 
 export const EditTask = () => {
   const [date, setDate] = useState("");
@@ -19,6 +22,10 @@ export const EditTask = () => {
   const [done, setDone] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const taskId = id.slice(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => setIsModalOpen(false);
 
   const handleChange = e => {
     switch (e.target.name) {
@@ -47,19 +54,20 @@ export const EditTask = () => {
     return time;
   };
 
+  
   const [hour, minutes] = hours.split(':');
-  const time = hour * 60 + minutes;
-
+  const time = Number(hour * 60) + Number(minutes);
+  
   const handleSubmit = async e => {
     e.preventDefault();
     const task = {
-      date: new Date(date).getTime(),
-      hours: Number(time),
+      date: date,
+      hours: time,
       message,
       done,
     };
-    await edit(id[1], task);
-    navigate('/list');
+    await editTask(taskId, task);
+    navigate(-1);
   };
 
   const togle = () => {
@@ -67,25 +75,30 @@ export const EditTask = () => {
     return;
   };
 
+  const onDelete = async () => {
+    await delTask(taskId);
+    navigate(-1);
+  };
+
   useEffect(() => {
     const renderTask = async () => {
       try {
         const taskUser = await getTask();
-        const task = taskUser.find(i => i.id === Number(id[1]));
+        const task = taskUser.find(i => i.id === Number(taskId));
         setDate(task.date);
         setHours(translateTime(task.hours));
         setMessage(task.message);
         setDone(task.done);
-        console.log(task);
       } catch (error) {
         console.log(error);
       }
     };
     renderTask();
-  }, [id]);
+  }, [taskId]);
 
   return (
     <>
+      {isModalOpen && <Modal onClose={handleCloseModal} onDelete={onDelete} />}
       <Form onSubmit={handleSubmit}>
         <Input
           onInput={handleChange}
@@ -107,12 +120,16 @@ export const EditTask = () => {
           type="text"
           name="message"
         />
-        <Checkbox>
-          <Check onClick={togle} checked={done}>
-            <Svg checked={done} />
-          </Check>
-          <Text>Is complete</Text>
-        </Checkbox>
+        <Common>
+          <Checkbox>
+            <Check onClick={togle} checked={done}>
+              <Svg checked={done} />
+            </Check>
+            <Text>Is complete</Text>
+          </Checkbox>
+          <DelSvg onClick={() => setIsModalOpen(true)} />
+        </Common>
+
         <Button type="submit">Create</Button>
       </Form>
     </>

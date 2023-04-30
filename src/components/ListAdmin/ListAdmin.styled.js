@@ -160,3 +160,19 @@ export const ListText = styled.div`
     line-height: 32px;
   }
 `;
+
+export const Name = styled.h3`
+  font-family: 'MuseoModerno';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 27px;
+  color: #ffffff;
+  margin-bottom: 6px;
+
+  @media (min-width: 768px) {
+    font-size: 21px;
+    line-height: 32px;
+    margin-bottom: 8px;
+  }
+`;

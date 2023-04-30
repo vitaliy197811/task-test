@@ -9,7 +9,7 @@ import { Button, Search, LoaderBox, Task, Svg, ListText } from './List.styled';
 export const List = () => {
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState([]);
-  const [, setSearch] = useState('');
+  const [search, setSearch] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,6 +23,10 @@ export const List = () => {
     }
     return;
   };
+
+  const showVisibleTasks = () =>
+    task.filter(e => e.message.toLowerCase().includes(search.toLowerCase()));
+  const visibleTasks = showVisibleTasks();
 
   useEffect(() => {
     const renderTask = async () => {
@@ -51,7 +55,7 @@ export const List = () => {
         </LoaderBox>
       ) : task && !loading ? (
         <ul>
-          {task.map(({ id, date, hours, message, done }) => (
+          {visibleTasks.map(({ id, date, hours, message, done }) => (
             <Task
               done={classDone(done)}
               key={id}

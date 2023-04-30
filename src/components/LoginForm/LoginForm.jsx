@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { loginUser } from 'api/serviseApi';
-// import { useDispatch } from 'react-redux';
+import { loginUser, loginAdmin } from 'api/serviseApi';
 import { Form, Input, Button, Title } from './LoginForm.styled';
 
 export const LoginForm = () => {
@@ -26,7 +25,6 @@ export const LoginForm = () => {
       default:
         break;
     }
-    // localStorage.setItem('user', [setName, setPassword]);
   };
 
   const handleSubmit = async e => {
@@ -36,10 +34,17 @@ export const LoginForm = () => {
       password,
     };
 
-    const data = await loginUser(user);
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(user));
-    navigate('/list');
+    if (user.name === 'Admin' && user.password === 'password') {
+      const data = await loginAdmin(user);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate('/admin');
+    } else {
+      const data = await loginUser(user);
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(user));
+      navigate('/list');
+    }
   };
 
   return (

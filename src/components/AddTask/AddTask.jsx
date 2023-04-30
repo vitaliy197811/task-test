@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { create } from 'api/serviseApi';
+import { createTask } from 'api/serviseApi';
 import {
   Form,
   Input,
@@ -42,18 +42,18 @@ export const AddTask = () => {
   };
 
   const [hour, minutes] = hours.split(':');
-  const time = hour * 60 + minutes;
+  const time = Number(hour * 60) + Number(minutes);
 
   const handleSubmit = async e => {
     e.preventDefault();
     const task = {
-      date: new Date(date).getTime(),
-      hours: Number(time),
+      date,
+      hours: time,
       message,
       done,
     };
-    await create(task);
-    navigate('/list');
+    await createTask(task);
+    navigate(-1);
   };
 
   return (
@@ -87,7 +87,7 @@ export const AddTask = () => {
         />
         <Checkbox>
           <Check onClick={togle} checked={done}>
-            <Svg checked={done} />
+            <Svg checked={done} border="0" />
           </Check>
           <Text>Is complete</Text>
         </Checkbox>

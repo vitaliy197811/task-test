@@ -2,11 +2,13 @@ import { Route, Routes } from 'react-router-dom';
 // import { lazy } from 'react';
 import PublicRoute from './PublicRoute';
 import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
 
 import { Layout } from 'components/Layout/Layout';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
 import { RegisterPage } from '../pages/RegisterPage/RegisterPage';
 import { ListPage } from '../pages/ListPage/ListPage';
+import { ListAdminPage } from '../pages/ListAdminPage/ListAdminPage';
 import { CreatePage } from '../pages/CreatePage/CreatePage';
 import { EditPage } from '../pages/EditPage/EditPage';
 // const ListPage = lazy(() => import('../pages/ListPage/ListPage'));
@@ -27,6 +29,10 @@ export const App = () => {
             element={
               <PublicRoute component={<RegisterPage />} redirectTo="/list" />
             }
+          />
+          <Route
+            path="/admin"
+            element={<AdminRoute component={<ListAdminPage />} />}
           />
           <Route
             path="/list"
