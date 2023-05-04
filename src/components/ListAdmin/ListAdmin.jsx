@@ -24,18 +24,21 @@ export const ListAdmin = () => {
   };
 
   const showVisibleTasks = () => {
-    const filteredUsers = users.map(user => {
-      const filteredTasks = user.task.filter(task =>
-        task.message.toLowerCase().includes(search.toLowerCase())
-      );
-      const filteredMessages = filteredTasks.map(task => task);
-      return {
-        userId: user.userId,
-        name: user.name,
-        task: filteredMessages,
-      };
-    });
-    return filteredUsers;
+    if (users) {
+      const filteredUsers = users.map(user => {
+        const filteredTasks = user.task.filter(task =>
+          task.message.toLowerCase().includes(search.toLowerCase())
+        );
+        const filteredMessages = filteredTasks.map(task => task);
+        return {
+          userId: user.userId,
+          name: user.name,
+          task: filteredMessages,
+        };
+      });
+      return filteredUsers;
+    }
+    return;
   };
   const visibleTasks = showVisibleTasks();
 
@@ -77,18 +80,19 @@ export const ListAdmin = () => {
             <li key={user.userId}>
               {user.task.length > 0 && <Name>{user.name}</Name>}
               <ul>
-                {user.task.map(task => (
+                {user.task.map(({ id, date, hours, message, done }) => (
                   <Task
-                    done={classDone(task.done)}
-                    key={task.id}
-                    to={`/list/:${task.id}`}
-                    statefrom={{ from: location }}
-                  >
+                    done={classDone(done)}
+                    key={id}
+                      to={{ pathname: `/list/${id}` }}
+                      state={{ id, date, hours, message, done }}
+                      statefrom={{ from: location }}
+                          >
                     <TaskItem
-                      id={task.id}
-                      date={task.date}
-                      hours={task.hours}
-                      message={task.message}
+                      id={id}
+                      date={date}
+                      hours={hours}
+                      message={message}
                     />
                   </Task>
                 ))}

@@ -17,6 +17,8 @@ export const AddTask = () => {
   const [hours, setHours] = useState('');
   const [message, setMessage] = useState('');
   const [done, setDone] = useState(false);
+  const [placeholderData, setPlaceholderData] = useState('Data');
+  const [placeholderTime, setPlaceholderTime] = useState('Time');
 
   const navigate = useNavigate();
 
@@ -63,8 +65,11 @@ export const AddTask = () => {
           onInput={handleChange}
           value={date}
           type="text"
-          // pattern={/^([0-9]{4})-([0-9]{2})-([0-9]{2})$/}
-          placeholder="Date"
+          pattern="^([0-9]{4})-([0-9]{2})-([0-9]{2})$"
+          placeholder={placeholderData}
+          onFocus={() => setPlaceholderData('YYYY-MM-DD')}
+          onBlur={() => setPlaceholderData('Data')}
+          title="Enter the date in the specified format. For example: 2023-12-12"
           name="date"
           required
         />
@@ -72,8 +77,11 @@ export const AddTask = () => {
           onInput={handleChange}
           value={hours}
           type="text"
-          // pattern={/^(?:[01]\d|2[0-3]):[0-5]\d$/}
-          placeholder="Time"
+          pattern="^(?:[01]\d|2[0-3]):[0-5]\d$"
+          placeholder={placeholderTime}
+          onFocus={() => setPlaceholderTime('--:--')}
+          onBlur={() => setPlaceholderTime('Time')}
+          title="Enter the time in the specified format. For example: 12:00"
           name="hours"
           required
         />

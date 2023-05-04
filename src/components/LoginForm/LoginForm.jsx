@@ -8,12 +8,6 @@ export const LoginForm = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const data = JSON.parse(localStorage.getItem('user'));
-  if (data) {
-    setName(data.name);
-    setPassword(data.password);
-  } 
-
   const handleChange = e => {
     switch (e.target.name) {
       case 'name':
@@ -33,18 +27,22 @@ export const LoginForm = () => {
       name,
       password,
     };
-
-    if (user.name === 'Admin' && user.password === 'password') {
+    console.log(user.name);
+    
+    if (user.name === 'Admin') {
       const data = await loginAdmin(user);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/admin');
-    } else {
+      navigate('/admin', { replace: false });
+    }
+
+    if (user.name !== 'Admin') {
       const data = await loginUser(user);
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(user));
-      navigate('/list');
+      navigate('/list', { replace: false });
     }
+    window.location.reload();
   };
 
   return (

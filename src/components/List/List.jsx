@@ -5,7 +5,6 @@ import { Loader } from '../Loader/Loader';
 import { getTask } from 'api/serviseApi';
 import { Button, Search, LoaderBox, Task, Svg, ListText } from './List.styled';
 
-
 export const List = () => {
   const [loading, setLoading] = useState(false);
   const [task, setTask] = useState([]);
@@ -24,23 +23,32 @@ export const List = () => {
     return;
   };
 
-  const showVisibleTasks = () =>
-    task.filter(e => e.message.toLowerCase().includes(search.toLowerCase()));
-  const visibleTasks = showVisibleTasks();
-
   useEffect(() => {
     const renderTask = async () => {
       setLoading(true);
       try {
-        setTask(await getTask());
+        const tasksData = await getTask();
+        setTask(tasksData);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       } finally {
         setLoading(false);
       }
     };
     renderTask();
   }, []);
+
+  const showVisibleTasks = () => {
+    if (task) {
+      const filteredTasks = task.filter(e =>
+        e.message.toLowerCase().includes(search.toLowerCase())
+      );
+      return filteredTasks;
+    }
+    return;
+  };
+  const visibleTasks = showVisibleTasks();
+  console.log(visibleTasks);
 
   return (
     <>
@@ -53,13 +61,14 @@ export const List = () => {
         <LoaderBox>
           <Loader />
         </LoaderBox>
-      ) : task && !loading ? (
+      ) : visibleTasks && !loading ? (
         <ul>
           {visibleTasks.map(({ id, date, hours, message, done }) => (
             <Task
               done={classDone(done)}
               key={id}
-              to={`/list/:${id}`}
+              to={{ pathname: `/list/${id}` }}
+              state={{ id, date, hours, message, done }}
               statefrom={{ from: location }}
             >
               <TaskItem id={id} date={date} hours={hours} message={message} />

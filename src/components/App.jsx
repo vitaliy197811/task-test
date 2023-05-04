@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-// import { lazy } from 'react';
-import PublicRoute from './PublicRoute';
-import PrivateRoute from './PrivateRoute';
-import AdminRoute from './AdminRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+// import AdminRoute from './AdminRoute';
+// import UserRoute from './UserRoute';
 
 import { Layout } from 'components/Layout/Layout';
 import { LoginPage } from '../pages/LoginPage/LoginPage';
@@ -11,7 +11,6 @@ import { ListPage } from '../pages/ListPage/ListPage';
 import { ListAdminPage } from '../pages/ListAdminPage/ListAdminPage';
 import { CreatePage } from '../pages/CreatePage/CreatePage';
 import { EditPage } from '../pages/EditPage/EditPage';
-// const ListPage = lazy(() => import('../pages/ListPage/ListPage'));
 
 export const App = () => {
   return (
@@ -32,7 +31,7 @@ export const App = () => {
           />
           <Route
             path="/admin"
-            element={<AdminRoute component={<ListAdminPage />} />}
+            element={<PrivateRoute component={<ListAdminPage />} />}
           />
           <Route
             path="/list"

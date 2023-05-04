@@ -39,6 +39,7 @@ export const RegisterForm = () => {
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(user));
     navigate('/list');
+    window.location.reload();
   };
 
   return (
@@ -58,6 +59,8 @@ export const RegisterForm = () => {
           type="password"
           placeholder="Password"
           name="password"
+          pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$"
+          title="Password must contain at least 8 characters, including at least one number, one lowercase letter, and one uppercase letter."
           required
         />
         <Button type="submit">Create account</Button>
