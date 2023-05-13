@@ -1,18 +1,12 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser, loginUser } from 'api/serviseApi';
-import {
-  Form,
-  Input,
-  Button,
-  Title,
-} from '../LoginForm/LoginForm.styled';
+import { registerUser, loginUser } from 'api';
+import { Form, Input, Button, Title } from '../LoginForm/LoginForm.styled';
 
 export const RegisterForm = () => {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
 
   const handleChange = e => {
     switch (e.target.name) {

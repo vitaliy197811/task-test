@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createTask } from 'api/serviseApi';
+import { createTask } from 'api';
 import {
   Form,
   Input,

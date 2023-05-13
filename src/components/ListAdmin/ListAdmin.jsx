@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { TaskItem } from '../TaskItem/TaskItem';
 import { Loader } from '../Loader/Loader';
-import { getUsers, getUsersTask } from 'api/serviseApi';
+import { getUsers, getUsersTask } from 'api';
 import { Search, LoaderBox, Task, ListText, Name } from './ListAdmin.styled';
-
 
 export const ListAdmin = () => {
   const [loading, setLoading] = useState(false);
@@ -84,10 +83,10 @@ export const ListAdmin = () => {
                   <Task
                     done={classDone(done)}
                     key={id}
-                      to={{ pathname: `/list/${id}` }}
-                      state={{ id, date, hours, message, done }}
-                      statefrom={{ from: location }}
-                          >
+                    to={{ pathname: `/list/${id}` }}
+                    state={{ id, date, hours, message, done }}
+                    statefrom={{ from: location }}
+                  >
                     <TaskItem
                       id={id}
                       date={date}

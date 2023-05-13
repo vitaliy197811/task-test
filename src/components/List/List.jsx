@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { TaskItem } from '../TaskItem/TaskItem';
 import { Loader } from '../Loader/Loader';
-import { getTask } from 'api/serviseApi';
+import { getTask } from 'api/serviseAp1i';
 import { Button, Search, LoaderBox, Task, Svg, ListText } from './List.styled';
 
 export const List = () => {
@@ -48,7 +48,6 @@ export const List = () => {
     return;
   };
   const visibleTasks = showVisibleTasks();
-  console.log(visibleTasks);
 
   return (
     <>

@@ -75,8 +75,9 @@ export const Svg = styled.div`
 
 export const Search = styled.input`
   direction: none;
-  width: 269px;
-  height: 26px;
+  box-sizing: border-box;
+  width: 335px;
+  height: 62px;
   padding: 18px 33px;
   border-radius: 134px;
   font-family: 'MuseoModerno';
@@ -92,11 +93,11 @@ export const Search = styled.input`
   outline: none;
 
   @media (min-width: 768px) {
-    width: 622px;
+    width: 688px;
   }
 
   @media (min-width: 1440px) {
-    width: 1254px;
+    width: 1320px;
   }
 
   :hover,
@@ -118,7 +119,7 @@ justify-content: center;
 
 export const Task = styled(Link)`
   position: relative;
-  margin: 0 -7px 17px -7px;
+  margin: 0 0 17px 0;
   min-height: 142px;
   padding: 10px 10px 55px 10px;
   background: ${props => (props.done ? '#272F28' : '#201d1e')};
@@ -127,13 +128,13 @@ export const Task = styled(Link)`
 
   @media (min-width: 768px) {
     min-height: 180px;
-    margin: 0 -14px 34px -14px;
+    margin: 0 0 34px 0;
     padding: 20px 20px 70px 20px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1140px) {
     min-height: 180px;
-    margin: 0 -21px 51px -21px;
+    margin: 0 0 51px 0;
     padding: 20px 20px 70px 20px;
   }
 

@@ -8,8 +8,9 @@ export const Form = styled.form`
 
 export const Input = styled.input`
   direction: none;
-  width: 269px;
-  height: 26px;
+  box-sizing: border-box;
+  width: 335px;
+  height: 62px;
   padding: 18px 33px;
   border-radius: 134px;
   font-family: 'MuseoModerno';
@@ -25,11 +26,11 @@ export const Input = styled.input`
   outline: none;
 
   @media (min-width: 768px) {
-    width: 622px;
+    width: 688px;
   }
 
   @media (min-width: 1440px) {
-    width: 1254px;
+    width: 1320px;
   }
 
   :hover,
@@ -45,7 +46,8 @@ export const Input = styled.input`
 
 export const Textarea = styled.textarea`
   direction: none;
-  width: 269px;
+  box-sizing: border-box;
+  width: 335px;
   min-height: 236px;
   padding: 18px 33px;
   border-radius: 37px;
@@ -62,11 +64,11 @@ export const Textarea = styled.textarea`
   background: #312f36;
 
   @media (min-width: 768px) {
-    width: 622px;
+    width: 688px;
   }
 
   @media (min-width: 1440px) {
-    width: 1254px;
+    width: 1320px;
   }
 
   :hover,

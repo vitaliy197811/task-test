@@ -1,6 +1,6 @@
-import { useState, useEffect} from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { editTask, delTask } from 'api/serviseApi';
+import { editTask, delTask } from 'api';
 import {
   Form,
   Input,
@@ -13,7 +13,7 @@ import {
   Common,
   DelSvg,
 } from '../AddTask/AddTask.styled';
-import { Modal} from '../Modal/Modal';
+import { Modal } from '../Modal/Modal';
 
 export const EditTask = () => {
   const [date, setDate] = useState('');
@@ -93,7 +93,7 @@ export const EditTask = () => {
     };
     renderTask();
   }, [location]);
-  
+
   return (
     <>
       {isModalOpen && <Modal onClose={handleCloseModal} onDelete={onDelete} />}
