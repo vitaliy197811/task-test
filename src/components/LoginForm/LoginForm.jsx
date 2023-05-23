@@ -4,8 +4,6 @@ import { loginUser, loginAdmin } from 'api';
 import { Form, Input, Button, Title } from './LoginForm.styled';
 
 export const LoginForm = () => {
-  // const [name, setName] = useState('');
-  // const [password, setPassword] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     password: '',
@@ -14,17 +12,6 @@ export const LoginForm = () => {
   const admin = process.env.REACT_APP_ADMIN;
 
   const handleChange = e => {
-    // switch (e.target.name) {
-    //   case 'name':
-    //     setName(e.target.value);
-    //     break;
-    //   case 'password':
-    //     setPassword(e.target.value);
-    //     break;
-    //   default:
-    //     break;
-    // }
-
     const { name, value } = e.target;
     setFormData(prevFormData => ({
       ...prevFormData,
@@ -34,12 +21,6 @@ export const LoginForm = () => {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    // const user = {
-    //   name,
-    //   password,
-    // };
-    // console.log(user.name);
-
     if (formData.name === admin) {
       const data = await loginAdmin(formData);
       localStorage.setItem('token', data.token);

@@ -4,34 +4,27 @@ import { registerUser, loginUser } from 'api';
 import { Form, Input, Button, Title } from '../LoginForm/LoginForm.styled';
 
 export const RegisterForm = () => {
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    password: '',
+  });
   const navigate = useNavigate();
 
   const handleChange = e => {
-    switch (e.target.name) {
-      case 'name':
-        setName(e.target.value);
-        break;
-      case 'password':
-        setPassword(e.target.value);
-        break;
-      default:
-        break;
-    }
+    const { name, value } = e.target;
+    setFormData(prevFormData => ({
+      ...prevFormData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const user = {
-      name,
-      password,
-    };
-    await registerUser(user);
+    await registerUser(formData);
 
-    const data = await loginUser(user);
+    const data = await loginUser(formData);
     localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('user', JSON.stringify(formData));
     navigate('/list');
     window.location.reload();
   };
@@ -41,7 +34,7 @@ export const RegisterForm = () => {
       <Form onSubmit={handleSubmit}>
         <Input
           onInput={handleChange}
-          value={name}
+          value={formData.name}
           type="text"
           placeholder="Login"
           name="name"
@@ -49,7 +42,7 @@ export const RegisterForm = () => {
         />
         <Input
           onInput={handleChange}
-          value={password}
+          value={formData.password}
           type="password"
           placeholder="Password"
           name="password"
